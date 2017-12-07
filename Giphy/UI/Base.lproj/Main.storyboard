@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MyCell" id="2eu-5W-HTR">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GIFImgCell" id="2eu-5W-HTR">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -43,14 +43,25 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No gifs found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5p-VN-2qv">
-                                <rect key="frame" x="97.5" y="297" width="180.5" height="35"/>
+                                <rect key="frame" x="97.5" y="152.5" width="180.5" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="kr8-Gp-AqF"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R09-hZ-rHq">
+                                <rect key="frame" x="62.5" y="207.5" width="250" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="20l-3R-fd6"/>
+                                    <constraint firstAttribute="width" constant="250" id="yoo-mP-tIQ"/>
+                                </constraints>
+                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type something..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-p6-EiV" customClass="TextField" customModule="Giphy" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.13725490200000001" green="0.15686274510000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="iJn-sA-gLg"/>
                                 </constraints>
@@ -65,27 +76,94 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7lP-29-93h"/>
+                            <constraint firstItem="A5p-VN-2qv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Bdy-0E-QMy"/>
                             <constraint firstItem="A5p-VN-2qv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EVd-j0-GHG"/>
                             <constraint firstItem="2qp-jc-ucS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="F4U-lK-5gT"/>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="top" secondItem="2qp-jc-ucS" secondAttribute="bottom" id="FmR-5G-QKF"/>
+                            <constraint firstItem="R09-hZ-rHq" firstAttribute="top" secondItem="A5p-VN-2qv" secondAttribute="bottom" constant="20" id="Hya-wn-0rg"/>
+                            <constraint firstItem="R09-hZ-rHq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-51" id="Imb-zx-OJh"/>
                             <constraint firstItem="2qp-jc-ucS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WkD-xC-U2F"/>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="YLl-H9-reK"/>
                             <constraint firstItem="2qp-jc-ucS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hkK-E2-J3q"/>
-                            <constraint firstItem="A5p-VN-2qv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-19" id="k5k-cZ-Okn"/>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="l6Y-tS-vPx"/>
+                            <constraint firstItem="R09-hZ-rHq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xWB-NP-llx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="iboImageViewNoGifFound" destination="R09-hZ-rHq" id="Bk9-Xv-p2P"/>
                         <outlet property="iboLabelNoGifsFound" destination="A5p-VN-2qv" id="Zo3-OQ-2YA"/>
                         <outlet property="iboTextEditConstraintBottom" destination="YLl-H9-reK" id="Tp9-BZ-smi"/>
                         <outlet property="iboTextEditInput" destination="RAf-p6-EiV" id="VJM-Ng-13X"/>
                         <outlet property="myCollectionView" destination="2qp-jc-ucS" id="TBA-FN-XKr"/>
+                        <segue destination="51g-Zi-R0G" kind="custom" identifier="SHOW_GIF_SHARE" customClass="MIBlurPopupSegue" customModule="Giphy" customModuleProvider="target" id="6eg-cU-yJf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--Popup View Controller-->
+        <scene sceneID="CfO-sv-LDz">
+            <objects>
+                <viewController id="51g-Zi-R0G" customClass="PopupViewController" customModule="Giphy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5MK-hr-WJq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rG6-gp-N3a">
+                                <rect key="frame" x="37.5" y="127" width="300" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="Exu-Ah-wX5"/>
+                                    <constraint firstAttribute="height" constant="250" id="abq-Gd-kdC"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mg1-uZ-qBM">
+                                <rect key="frame" x="153" y="455" width="69" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nzu-90-rrl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="dismissButtonTapped:" destination="51g-Zi-R0G" eventType="touchUpInside" id="Blx-f4-rNP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9S-ue-H5U">
+                                <rect key="frame" x="144.5" y="397" width="85" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5Py-8A-tZL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="31"/>
+                                <state key="normal" title="Share">
+                                    <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="shareButtonTapped:" destination="51g-Zi-R0G" eventType="touchUpInside" id="jbI-Hn-BoG"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="A9S-ue-H5U" firstAttribute="centerX" secondItem="5MK-hr-WJq" secondAttribute="centerX" id="1QS-ET-sP6"/>
+                            <constraint firstItem="rG6-gp-N3a" firstAttribute="centerY" secondItem="5MK-hr-WJq" secondAttribute="centerY" constant="-81.5" id="Xbf-Ra-W73"/>
+                            <constraint firstItem="mg1-uZ-qBM" firstAttribute="centerX" secondItem="5MK-hr-WJq" secondAttribute="centerX" id="dIQ-2n-KBH"/>
+                            <constraint firstItem="rG6-gp-N3a" firstAttribute="centerX" secondItem="5MK-hr-WJq" secondAttribute="centerX" id="fTB-8X-bv2"/>
+                            <constraint firstItem="A9S-ue-H5U" firstAttribute="top" secondItem="rG6-gp-N3a" secondAttribute="bottom" constant="20" id="jWp-3X-q0n"/>
+                            <constraint firstItem="mg1-uZ-qBM" firstAttribute="top" secondItem="A9S-ue-H5U" secondAttribute="bottom" constant="8" id="w6y-UN-1zH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cs3-io-Lbg"/>
+                    </view>
+                    <connections>
+                        <outlet property="iboButtonShare" destination="A9S-ue-H5U" id="zZf-PL-jcw"/>
+                        <outlet property="iboImageViewGif" destination="rG6-gp-N3a" id="Wf4-sj-fZR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AUZ-n4-0Va" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="917.60000000000002" y="133.5832083958021"/>
         </scene>
     </scenes>
 </document>
