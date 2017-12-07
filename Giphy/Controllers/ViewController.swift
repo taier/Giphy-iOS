@@ -12,6 +12,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     // MARK: - Constants
     let IMG_DOWNLOAD_PER_REQUEST_COUNT = 100
+    let IMG_CACHE_SIZE = 200
     let CELL_IDENTIFIER = "GIFImgCell"
     
     // MARK: - Variables
@@ -39,6 +40,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        self.cachedImages.removeAll()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -127,25 +129,35 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let myCell = collectionView.dequeueReusableCell(withReuseIdentifier:CELL_IDENTIFIER, for: indexPath as IndexPath)
         myCell.contentView.backgroundColor = UIColor.black;
         
+        // Clean up old img views
         for view in myCell.contentView.subviews {
             view.removeFromSuperview()
+            if view is UIImageView {
+                let imgView = view as? UIImageView
+                imgView?.image = nil;
+            }
         }
         
+        // Create Image View for img
         let imageView = UIImageView(frame: CGRect(x:0, y:0, width:myCell.frame.size.width, height:myCell.frame.size.height))
         imageView.backgroundColor = UIColor.black
         imageView.contentMode = UIViewContentMode.scaleAspectFit
-        myCell.addSubview(imageView)
+        myCell.contentView.addSubview(imageView)
         
-        if(self.cachedImages.count > indexPath.item) {
-            imageView.image = self.cachedImages[indexPath.item]
-        } else {
+        // If have img in cache, use it
+        if let img = self.cachedImages[indexPath.item] {
+            imageView.image = img;
+        } else if(self.imagesURLS.count > indexPath.item) {
+            // No img in cache, download it
             DispatchQueue.global(qos: .userInitiated).async {
                 let imageUrlString = self.imagesURLS[indexPath.item] as! String
                 let imageUrl:NSURL = NSURL(string: imageUrlString)!
                 let imageData:NSData = NSData(contentsOf: imageUrl as URL)!
                 DispatchQueue.main.async {
-                    imageView.image = UIImage.gif(data: imageData as Data)!
-                    self.cachedImages[indexPath.item] = imageView.image
+                    // Img downloaded, show and add to cache
+                    let image = UIImage.gif(data: imageData as Data)!
+                    imageView.image = image;
+                    self.addImageToCahce(image: image, key: indexPath.item)
                 }
             }
         }
@@ -240,6 +252,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         // Data
         popupViewController.gifImage = UIImage.gif(url: self.selectedGIfUrlToShare)
+    }
+    
+    // MARK: - Image Caching
+    func addImageToCahce(image:UIImage, key:Int) {
+        if(self.cachedImages.count > IMG_CACHE_SIZE) {
+            self.cachedImages.removeAll()
+        }
+        self.cachedImages[key] = image
     }
 }
 
