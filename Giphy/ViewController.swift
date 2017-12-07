@@ -22,6 +22,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     @IBOutlet weak var iboTextEditInput: UITextField!
     @IBOutlet weak var myCollectionView: UICollectionView?
     @IBOutlet weak var iboTextEditConstraintBottom: NSLayoutConstraint!
+    @IBOutlet weak var iboLabelNoGifsFound: UILabel!
     
     // MARK: -Live Cycle
     override func viewDidLoad() {
@@ -48,7 +49,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         self.myCollectionView!.dataSource = self
         self.myCollectionView!.delegate = self
         self.myCollectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "MyCell")
-        self.view.addSubview(myCollectionView!)
         
         loadListOfImages(input:"", newSearch:true)
     }
@@ -93,7 +93,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == self.images.count - 10 { // or if indexPath.row == myDat.count
+        if indexPath.item == self.images.count - 10 { 
             // CollectionView is scrolled to the bottom
             loadListOfImages(input: self.iboTextEditInput.text, newSearch:false)
         }
@@ -207,6 +207,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
             
             DispatchQueue.main.async {
+                self.iboLabelNoGifsFound.isHidden = self.images.count > 0
+                
                 if(newSearch) {
                     self.myCollectionView!.reloadData()
                 } else {

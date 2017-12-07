@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2qp-jc-ucS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="637"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3Wy-Ut-HY5">
                                     <size key="itemSize" width="100" height="100"/>
@@ -42,13 +42,20 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="FFS-Yl-2Vn"/>
                                 </connections>
                             </collectionView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-p6-EiV">
-                                <rect key="frame" x="0.0" y="637" width="375" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No gifs found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5p-VN-2qv">
+                                <rect key="frame" x="97.5" y="297" width="180.5" height="35"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="29"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type something..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-p6-EiV" customClass="TextField" customModule="Giphy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="iJn-sA-gLg"/>
+                                    <constraint firstAttribute="height" constant="44" id="iJn-sA-gLg"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="ObF-XF-GWO"/>
@@ -58,16 +65,19 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="7lP-29-93h"/>
+                            <constraint firstItem="A5p-VN-2qv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EVd-j0-GHG"/>
                             <constraint firstItem="2qp-jc-ucS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="F4U-lK-5gT"/>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="top" secondItem="2qp-jc-ucS" secondAttribute="bottom" id="FmR-5G-QKF"/>
                             <constraint firstItem="2qp-jc-ucS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="WkD-xC-U2F"/>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="YLl-H9-reK"/>
                             <constraint firstItem="2qp-jc-ucS" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hkK-E2-J3q"/>
+                            <constraint firstItem="A5p-VN-2qv" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-19" id="k5k-cZ-Okn"/>
                             <constraint firstItem="RAf-p6-EiV" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="l6Y-tS-vPx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="iboLabelNoGifsFound" destination="A5p-VN-2qv" id="Zo3-OQ-2YA"/>
                         <outlet property="iboTextEditConstraintBottom" destination="YLl-H9-reK" id="Tp9-BZ-smi"/>
                         <outlet property="iboTextEditInput" destination="RAf-p6-EiV" id="VJM-Ng-13X"/>
                         <outlet property="myCollectionView" destination="2qp-jc-ucS" id="TBA-FN-XKr"/>
