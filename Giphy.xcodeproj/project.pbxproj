@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B769D3D31FD85B9B000EF1AE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B769D3D21FD85B9B000EF1AE /* Assets.xcassets */; };
+		B77446551FE2814A0024BF57 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77446541FE2814A0024BF57 /* ImageCacheManager.swift */; };
 		B78FE74D1FD741C90040EE5F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78FE74C1FD741C90040EE5F /* AppDelegate.swift */; };
 		B78FE7521FD741C90040EE5F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B78FE7501FD741C90040EE5F /* Main.storyboard */; };
 		B78FE7571FD741C90040EE5F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B78FE7551FD741C90040EE5F /* LaunchScreen.storyboard */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		B769D3D21FD85B9B000EF1AE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B77446541FE2814A0024BF57 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		B78FE7491FD741C90040EE5F /* Giphy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Giphy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B78FE74C1FD741C90040EE5F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B78FE7511FD741C90040EE5F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,6 +79,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B77446531FE280FB0024BF57 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				B77446541FE2814A0024BF57 /* ImageCacheManager.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
 		B78FE7401FD741C90040EE5F = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +109,7 @@
 		B78FE74B1FD741C90040EE5F /* Giphy */ = {
 			isa = PBXGroup;
 			children = (
+				B77446531FE280FB0024BF57 /* Cache */,
 				B7E8BD1F1FD9635C00BB7304 /* Networking */,
 				B7E8BD1B1FD9621A00BB7304 /* Resources */,
 				B7E8BD181FD9620900BB7304 /* Libs */,
@@ -337,6 +348,7 @@
 			files = (
 				B7E8BD171FD9620500BB7304 /* UIImage+Gif.swift in Sources */,
 				B7E8BD211FD9652A00BB7304 /* NetworkingCallsProtocol.swift in Sources */,
+				B77446551FE2814A0024BF57 /* ImageCacheManager.swift in Sources */,
 				B7E8BD101FD961DA00BB7304 /* ViewController.swift in Sources */,
 				B78FE74D1FD741C90040EE5F /* AppDelegate.swift in Sources */,
 				B7E8BD0F1FD961DA00BB7304 /* PopupViewController.swift in Sources */,

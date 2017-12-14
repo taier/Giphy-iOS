@@ -12,19 +12,17 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     // MARK: - Constants
     let IMG_DOWNLOAD_PER_REQUEST_COUNT = 100
-    let IMG_CACHE_SIZE = 200
     let CELL_IDENTIFIER = "GIFImgCell"
     
     // MARK: - Variables
     var imagesURLS = [AnyObject]()
-    var cachedImages = [Int: UIImage]()
     var timer = Timer()
     var selectedGIfUrlToShare = ""
     var networkingAdapter:NetworkingCallsProtocol = GiphyAdapter()
     
     // MARK: - Outlets
     @IBOutlet weak var iboTextEditInput: UITextField!
-    @IBOutlet weak var myCollectionView: UICollectionView?
+    @IBOutlet weak var iboCollectionView: UICollectionView?
     @IBOutlet weak var iboTextEditConstraintBottom: NSLayoutConstraint!
     @IBOutlet weak var iboLabelNoGifsFound: UILabel!
     @IBOutlet weak var iboImageViewNoGifFound: UIImageView!
@@ -40,7 +38,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        self.cachedImages.removeAll()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,7 +69,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func setupCollectionView() {
         // Register cell (required)
-        self.myCollectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier:CELL_IDENTIFIER)
+        self.iboCollectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier:CELL_IDENTIFIER)
     }
     
     func setupData() {
@@ -145,19 +142,23 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         myCell.contentView.addSubview(imageView)
         
         // If have img in cache, use it
-        if let img = self.cachedImages[indexPath.item] {
-            imageView.image = img;
-        } else if(self.imagesURLS.count > indexPath.item) {
-            // No img in cache, download it
-            DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let img:UIImage = self.getImageFromCache(key:indexPath.item) {
+                DispatchQueue.main.async {
+                    imageView.image = img;
+                }
+            } else if(self.imagesURLS.count > indexPath.item) {
+                // No img in cache, download it
                 let imageUrlString = self.imagesURLS[indexPath.item] as! String
                 let imageUrl:NSURL = NSURL(string: imageUrlString)!
-                let imageData:NSData = NSData(contentsOf: imageUrl as URL)!
-                DispatchQueue.main.async {
-                    // Img downloaded, show and add to cache
-                    let image = UIImage.gif(data: imageData as Data)!
-                    imageView.image = image;
-                    self.addImageToCahce(image: image, key: indexPath.item)
+                if(imageUrl.absoluteString != "") {
+                    let imageData:NSData = NSData(contentsOf: imageUrl as URL)!
+                    DispatchQueue.main.async {
+                        // Img downloaded, show and add to cache
+                        let image = UIImage.gif(data: imageData as Data)!
+                        imageView.image = image;
+                        self.addImageToCahce(imageData:imageData as Data, key:indexPath.item)
+                    }
                 }
             }
         }
@@ -200,7 +201,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // If new search, we don't need old items
         if(newSearch) {
             self.imagesURLS.removeAll()
-            self.cachedImages.removeAll();
+            self.removeAllImagesFromCache();
         }
         
         // ** Try to get new items **
@@ -216,7 +217,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 
                 // If was a new search - just reload collection view
                 if(newSearch) {
-                    self.myCollectionView!.reloadData()
+                    self.iboCollectionView!.reloadData()
                 } else {
                     // If scroll to bottom, insert new items into collection view
                     if newItemsCount > 0 {
@@ -229,8 +230,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                         }
                         
                         // Insertion
-                        self.myCollectionView?.performBatchUpdates({() -> Void in
-                            self.myCollectionView?.insertItems(at: indexPaths as? [IndexPath] ?? [IndexPath]())
+                        self.iboCollectionView?.performBatchUpdates({() -> Void in
+                            self.iboCollectionView?.insertItems(at: indexPaths as? [IndexPath] ?? [IndexPath]())
                         }) { _ in }
                     }
                 }
@@ -255,11 +256,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     // MARK: - Image Caching
-    func addImageToCahce(image:UIImage, key:Int) {
-        if(self.cachedImages.count > IMG_CACHE_SIZE) {
-            self.cachedImages.removeAll()
-        }
-        self.cachedImages[key] = image
+    func addImageToCahce(imageData:Data, key:Int) {
+        ImageCacheManager.saveGifToCacheDirectory(imageData:imageData, name: String(key))
+    }
+    
+    func getImageFromCache(key:Int) -> UIImage? {
+        return ImageCacheManager.getImageFromCache(name: String(key))
+    }
+    
+    func removeAllImagesFromCache() {
+        ImageCacheManager.clearCachDirectory()
     }
 }
 

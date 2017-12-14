@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -15,11 +11,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Giphy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2qp-jc-ucS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="3Wy-Ut-HY5">
                                     <size key="itemSize" width="100" height="100"/>
@@ -43,7 +39,7 @@
                                 </connections>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No gifs found" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5p-VN-2qv">
-                                <rect key="frame" x="97.5" y="152.5" width="180.5" height="35"/>
+                                <rect key="frame" x="210" y="119" width="180.5" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="kr8-Gp-AqF"/>
                                 </constraints>
@@ -52,14 +48,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="R09-hZ-rHq">
-                                <rect key="frame" x="62.5" y="207.5" width="250" height="150"/>
+                                <rect key="frame" x="175" y="174" width="250" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="20l-3R-fd6"/>
                                     <constraint firstAttribute="width" constant="250" id="yoo-mP-tIQ"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Type something..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAf-p6-EiV" customClass="TextField" customModule="Giphy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.13725490200000001" green="0.15686274510000001" blue="0.21176470589999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -91,11 +87,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="iboCollectionView" destination="2qp-jc-ucS" id="TBA-FN-XKr"/>
                         <outlet property="iboImageViewNoGifFound" destination="R09-hZ-rHq" id="Bk9-Xv-p2P"/>
                         <outlet property="iboLabelNoGifsFound" destination="A5p-VN-2qv" id="Zo3-OQ-2YA"/>
                         <outlet property="iboTextEditConstraintBottom" destination="YLl-H9-reK" id="Tp9-BZ-smi"/>
                         <outlet property="iboTextEditInput" destination="RAf-p6-EiV" id="VJM-Ng-13X"/>
-                        <outlet property="myCollectionView" destination="2qp-jc-ucS" id="TBA-FN-XKr"/>
                         <segue destination="51g-Zi-R0G" kind="custom" identifier="SHOW_GIF_SHARE" customClass="MIBlurPopupSegue" customModule="Giphy" customModuleProvider="target" id="6eg-cU-yJf"/>
                     </connections>
                 </viewController>
@@ -108,18 +104,18 @@
             <objects>
                 <viewController id="51g-Zi-R0G" customClass="PopupViewController" customModule="Giphy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5MK-hr-WJq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rG6-gp-N3a">
-                                <rect key="frame" x="37.5" y="127" width="300" height="250"/>
+                                <rect key="frame" x="150" y="93.5" width="300" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="Exu-Ah-wX5"/>
                                     <constraint firstAttribute="height" constant="250" id="abq-Gd-kdC"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mg1-uZ-qBM">
-                                <rect key="frame" x="153" y="455" width="69" height="50"/>
+                                <rect key="frame" x="265.5" y="421.5" width="69" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="nzu-90-rrl"/>
                                 </constraints>
@@ -132,7 +128,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A9S-ue-H5U">
-                                <rect key="frame" x="144.5" y="397" width="85" height="50"/>
+                                <rect key="frame" x="257.5" y="363.5" width="85" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="5Py-8A-tZL"/>
                                 </constraints>
