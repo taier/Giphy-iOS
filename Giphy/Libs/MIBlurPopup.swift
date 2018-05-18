@@ -12,7 +12,7 @@ import UIKit
 public protocol MIBlurPopupDelegate: class {
     var popupView: UIView { get }
     var blurEffectStyle: UIBlurEffectStyle { get }
-    var initialScaleAmmount: CGFloat { get }
+    var initialScaleAmount: CGFloat { get }
     var animationDuration: TimeInterval { get }
 }
 
@@ -63,8 +63,8 @@ open class MIBlurPopup: NSObject {
             ])
         
         presentedControllerDelegate.popupView.alpha = 0
-        presentedControllerDelegate.popupView.transform = CGAffineTransform(scaleX: presentedControllerDelegate.initialScaleAmmount,
-                                                                            y: presentedControllerDelegate.initialScaleAmmount)
+        presentedControllerDelegate.popupView.transform = CGAffineTransform(scaleX: presentedControllerDelegate.initialScaleAmount,
+                                                                            y: presentedControllerDelegate.initialScaleAmount)
         
         // blur view animation workaround: need that to avoid the "blur-flashes"
         UIView.animate(withDuration: transitionDuration(using: transitionContext) * 0.75) {
@@ -103,8 +103,8 @@ open class MIBlurPopup: NSObject {
             animations: {
                 presentedViewController.view.alpha = 0
                 self.visualEffectBlurView.alpha = 0
-                presentedControllerDelegate.popupView.transform = CGAffineTransform(scaleX: presentedControllerDelegate.initialScaleAmmount,
-                                                                                    y: presentedControllerDelegate.initialScaleAmmount)
+                presentedControllerDelegate.popupView.transform = CGAffineTransform(scaleX: presentedControllerDelegate.initialScaleAmount,
+                                                                                    y: presentedControllerDelegate.initialScaleAmount)
             },
             completion: { isCompleted in
                 self.visualEffectBlurView.effect = nil

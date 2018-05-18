@@ -47,7 +47,7 @@ class ImageCacheManager: NSObject {
         return cachesDirectory
     }
     
-    static func clearCachDirectory(){
+    static func clearCacheDirectory(){
        let fileManager = FileManager.default
         let paths = self.getImagesCacheDirectoryPath()
         if fileManager.fileExists(atPath: paths){

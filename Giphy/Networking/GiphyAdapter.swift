@@ -12,9 +12,9 @@ class GiphyAdapter: NSObject, NetworkingCallsProtocol {
     
     let API_KEY = "kpPeUe6TpJCHlCrgUrR68M9lEaISJPEP"
     
-    func getImagesURLsForQuery(query: String, limit: Int, offset: Int, completion: @escaping (Array<AnyObject>) -> Void) {
+    func getImagesURLsForQuery(query: String, limit: Int, offset: Int, completion: @escaping (Array<DataItem>) -> Void) {
         
-        var returnImages = Array<AnyObject> ()
+        var returnImages = Array<DataItem> ()
         let myUrl = self.composeRequestURL(query: query, limit: limit, offset: offset);
         var request = URLRequest(url:myUrl)
         request.httpMethod = "GET"
@@ -38,7 +38,7 @@ class GiphyAdapter: NSObject, NetworkingCallsProtocol {
     }
     
     func composeRequestURL(query: String, limit: Int, offset: Int) -> URL {
-        // Excape input
+        // Escape input
         let excapedInput = query.addingPercentEncoding(
             withAllowedCharacters: CharacterSet.urlQueryAllowed)
         
@@ -49,27 +49,16 @@ class GiphyAdapter: NSObject, NetworkingCallsProtocol {
         return myUrl!;
     }
     
-    func parse(data: Data) -> Array<AnyObject> {
-        var returnImages = Array<AnyObject> ()
+    func parse(data: Data) -> Array<DataItem> {
+        var itemsData:GiphyItem = GiphyItem(data: Array<DataItem>())
         do {
-            if let json = try JSONSerialization.jsonObject(with:data, options:.allowFragments) as? [String:Any] {
-                if let data = json["data"] as? [AnyObject] {
-                    for item in data  {
-                        if let images = item["images"] as? [String:Any] {
-                            if let fixed_height_downsampled = images["fixed_height_downsampled"] as? [String:AnyObject] {
-                                if let url = fixed_height_downsampled["url"] {
-                                    returnImages.append(url);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            let decoder = JSONDecoder()
+            itemsData = try decoder.decode(GiphyItem.self, from: data)
         } catch let err{
             print(err.localizedDescription)
         }
-    
-        return returnImages;
+        
+        return itemsData.data!;
     }
 
 }

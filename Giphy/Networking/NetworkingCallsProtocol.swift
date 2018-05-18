@@ -8,5 +8,5 @@
 
 
 protocol NetworkingCallsProtocol {
-    func getImagesURLsForQuery(query:String, limit:Int, offset:Int, completion:@escaping  (_ result: Array<AnyObject>) -> Void)
+    func getImagesURLsForQuery(query:String, limit:Int, offset:Int, completion:@escaping  (_ result: Array<DataItem>) -> Void)
 }

@@ -15,7 +15,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     let CELL_IDENTIFIER = "GIFImgCell"
     
     // MARK: - Variables
-    var imagesURLS = [AnyObject]()
+    var imagesURLS = [DataItem]()
     var timer = Timer()
     var selectedGIfUrlToShare = ""
     var networkingAdapter:NetworkingCallsProtocol = GiphyAdapter()
@@ -149,7 +149,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
                 }
             } else if(self.imagesURLS.count > indexPath.item) {
                 // No img in cache, download it
-                let imageUrlString = self.imagesURLS[indexPath.item] as! String
+                let dataItem:DataItem = self.imagesURLS[indexPath.item]
+                let imageUrlString = (dataItem.images!.first!.value.url!)
                 let imageUrl:NSURL = NSURL(string: imageUrlString)!
                 if(imageUrl.absoluteString != "") {
                     let imageData:NSData = NSData(contentsOf: imageUrl as URL)!
@@ -167,7 +168,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
-        self.selectedGIfUrlToShare = (self.imagesURLS[indexPath.item] as? String)!;
+        let dataItem:DataItem = self.imagesURLS[indexPath.item]
+        self.selectedGIfUrlToShare = (dataItem.images!.first!.value.url!)
         self.performSegue(withIdentifier: "SHOW_GIF_SHARE", sender: nil)
     }
     
@@ -249,7 +251,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // UI
         popupViewController.customBlurEffectStyle = .dark
         popupViewController.customAnimationDuration = TimeInterval(0.5)
-        popupViewController.customInitialScaleAmmount = CGFloat(Double(10))
+        popupViewController.customInitialScaleAmount = CGFloat(Double(10))
         
         // Data
         popupViewController.gifImage = UIImage.gif(url: self.selectedGIfUrlToShare)
@@ -265,7 +267,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     }
     
     func removeAllImagesFromCache() {
-        ImageCacheManager.clearCachDirectory()
+        ImageCacheManager.clearCacheDirectory()
     }
 }
 

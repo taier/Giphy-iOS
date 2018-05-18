@@ -5,7 +5,7 @@ class PopupViewController: UIViewController {
 
     // MARK: - Variables
     var customBlurEffectStyle: UIBlurEffectStyle!
-    var customInitialScaleAmmount: CGFloat!
+    var customInitialScaleAmount: CGFloat!
     var customAnimationDuration: TimeInterval!
     var gifImage:UIImage!
     
@@ -63,8 +63,8 @@ extension PopupViewController: MIBlurPopupDelegate {
         return customBlurEffectStyle
     }
     
-    var initialScaleAmmount: CGFloat {
-        return customInitialScaleAmmount
+    var initialScaleAmount: CGFloat {
+        return customInitialScaleAmount
     }
     
     var animationDuration: TimeInterval {
